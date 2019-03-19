@@ -52,14 +52,16 @@ const http = require('http');
 const morgan = require('morgan');
 const bodyParser = require('body-parser');
 
+const dishRouter = require('./routes/dishRouter');
 const hostname = 'localhost';
 const port = 3000;
 
 const app = express();
 app.use(morgan('dev'));
 app.use(bodyParser.json());
+app.use('/dishes', dishRouter);
 
-app.all('/dishes', (req,res,next) => {
+/* app.all('/dishes', (req,res,next) => {
 	res.ststusCode = 200;
 	res.setHeader('Content-Type', 'text/plain');
 	next();
@@ -103,7 +105,7 @@ app.put('/dishes/:dishId', (req,res,next) => {
 
 app.delete('/dishes/:dishId', (req,res,next) => {
 	res.end('Deleting dish: ' + req.params.dishId);
-});
+}); */
 
 app.use(express.static(__dirname+ '/public'));
 
